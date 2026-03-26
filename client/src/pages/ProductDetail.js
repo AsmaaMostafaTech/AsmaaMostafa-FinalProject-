@@ -13,9 +13,12 @@ const ProductDetail = () => {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products/${id}`);
-        const data = await response.json();
-        setProduct(data);
+        const response = await fetch(`http://localhost:5000/api/products/${id}`);
+        if (!response.ok) {
+          throw new Error('Product not found');
+        }
+        const product = await response.json();
+        setProduct(product);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -121,12 +124,12 @@ const ProductDetail = () => {
                   {[...Array(5)].map((_, i) => (
                     <FiStar 
                       key={i} 
-                      className={`${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-text-secondary'}`}
+                      className={`${i < Math.floor(product.rating || 0) ? 'text-yellow-400 fill-current' : 'text-text-secondary'}`}
                     />
                   ))}
                 </div>
                 <span className="text-text-secondary">
-                  {product.rating} ({product.reviews.toLocaleString()} reviews)
+                  {product.rating || 0} ({product.reviews?.toLocaleString() || 0} reviews)
                 </span>
               </div>
 
@@ -248,11 +251,11 @@ const ProductDetail = () => {
                   </div>
                   <div>
                     <div className="text-text-secondary text-sm mb-1">Customer Rating</div>
-                    <div className="text-text-primary font-semibold">{product.rating} / 5.0</div>
+                    <div className="text-text-primary font-semibold">{product.rating || 0} / 5.0</div>
                   </div>
                   <div>
                     <div className="text-text-secondary text-sm mb-1">Total Reviews</div>
-                    <div className="text-text-primary font-semibold">{product.reviews.toLocaleString()}</div>
+                    <div className="text-text-primary font-semibold">{product.reviews?.toLocaleString() || 0}</div>
                   </div>
                 </div>
               </div>

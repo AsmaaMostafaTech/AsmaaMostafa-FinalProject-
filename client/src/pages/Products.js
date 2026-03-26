@@ -19,57 +19,35 @@ const Products = () => {
   const { category, minPrice, maxPrice, sortBy } = filters;
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const loadProducts = async () => {
       setLoading(true);
+      
       try {
-        const params = new URLSearchParams();
-        if (category !== 'all') params.append('category', category);
-        if (minPrice) params.append('minPrice', minPrice);
-        if (maxPrice) params.append('maxPrice', maxPrice);
-        if (sortBy) params.append('sortBy', sortBy);
-        const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products?${params.toString()}`);
-        const data = await response.json();
-        setProducts(data);
+        // Build query string for API
+        const queryParams = new URLSearchParams();
+        if (category !== 'all') queryParams.append('category', category);
+        if (minPrice) queryParams.append('minPrice', minPrice);
+        if (maxPrice) queryParams.append('maxPrice', maxPrice);
+        if (sortBy) queryParams.append('sortBy', sortBy);
+        
+        const response = await fetch(`http://localhost:5000/api/products?${queryParams}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const products = await response.json();
+        setProducts(products);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
         setLoading(false);
       }
     };
-
-    fetchProducts();
+    
+    loadProducts();
   }, [category, minPrice, maxPrice, sortBy]);
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    try {
-      const params = new URLSearchParams();
-      const search = searchParams.get('search');
-      const category = searchParams.get('category') || filters.category;
-      const minPrice = searchParams.get('minPrice') || filters.minPrice;
-      const maxPrice = searchParams.get('maxPrice') || filters.maxPrice;
-      const sortBy = searchParams.get('sortBy') || filters.sortBy;
-
-      if (search) {
-        const response = await fetch(`/api/products/search/${search}`);
-        const data = await response.json();
-        setProducts(data);
-      } else {
-        if (category !== 'all') params.append('category', category);
-        if (minPrice) params.append('minPrice', minPrice);
-        if (maxPrice) params.append('maxPrice', maxPrice);
-        if (sortBy) params.append('sortBy', sortBy);
-
-        const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products?${params.toString()}`);
-        const data = await response.json();
-        setProducts(data);
-      }
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      setLoading(false);
-    }
-  };
+  const getCheapestPrice = (stores) => Math.min(...stores.map(s => s.price));
+  const getCheapestStore = (stores) => stores.reduce((min, store) => store.price < min.price ? store : min);
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
@@ -93,9 +71,6 @@ const Products = () => {
     });
     setSearchParams({});
   };
-
-  const getCheapestPrice = (stores) => Math.min(...stores.map(s => s.price));
-  const getCheapestStore = (stores) => stores.reduce((min, store) => store.price < min.price ? store : min);
 
   const categories = ['all', 'Electronics', 'Fashion', 'Home', 'Gaming'];
 

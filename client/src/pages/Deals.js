@@ -16,9 +16,12 @@ const Deals = () => {
 
   const fetchDeals = async () => {
     try {
-      const response = await fetch('https://asmaamostafa-final-project.vercel.app/api/products?sortBy=price-low');
-      const data = await response.json();
-      setProducts(data);
+      const response = await fetch('http://localhost:5000/api/products?sortBy=price-low');
+      if (!response.ok) {
+        throw new Error('Failed to fetch deals');
+      }
+      const products = await response.json();
+      setProducts(products);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching deals:', error);

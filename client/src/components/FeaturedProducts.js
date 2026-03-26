@@ -14,9 +14,13 @@ const FeaturedProducts = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch('https://asmaamostafa-final-project.vercel.app/api/products?sortBy=rating&limit=6');
-      const data = await response.json();
-      setProducts(data.slice(0, 6));
+      const response = await fetch('http://localhost:5000/api/products?sortBy=rating');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const products = await response.json();
+      // Get top 6 products
+      setProducts(products.slice(0, 6));
       setLoading(false);
     } catch (error) {
       console.error('Error fetching products:', error);
