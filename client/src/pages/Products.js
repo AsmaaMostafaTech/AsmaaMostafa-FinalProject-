@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { FiShoppingCart, FiHeart, FiFilter } from 'react-icons/fi';
-import { FiStar, FiChevronDown } from 'react-icons/fi';
+import { FiStar } from 'react-icons/fi';
 import { useCart } from '../contexts/CartContext';
 
 const Products = () => {
@@ -16,10 +16,29 @@ const Products = () => {
     maxPrice: '',
     sortBy: 'price-low'
   });
+  const { category, minPrice, maxPrice, sortBy } = filters;
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const params = new URLSearchParams();
+        if (category !== 'all') params.append('category', category);
+        if (minPrice) params.append('minPrice', minPrice);
+        if (maxPrice) params.append('maxPrice', maxPrice);
+        if (sortBy) params.append('sortBy', sortBy);
+        const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products?${params.toString()}`);
+        const data = await response.json();
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setLoading(false);
+      }
+    };
+
     fetchProducts();
-  }, [searchParams]);
+  }, [category, minPrice, maxPrice, sortBy]);
 
   const fetchProducts = async () => {
     setLoading(true);

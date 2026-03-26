@@ -8,7 +8,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
-  const { addToCart, addToWishlist, isInCart, isInWishlist } = useCart();
+  const { addToCart, addToWishlist, isInWishlist } = useCart();
 
   useEffect(() => {
     const loadProduct = async () => {
