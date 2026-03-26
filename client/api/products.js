@@ -1,7 +1,18 @@
 // Vercel Serverless Function for API
 const products = require('./products-data');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   const { category, minPrice, maxPrice, sortBy } = req.query;
   let filteredProducts = [...products];
 
@@ -43,9 +54,5 @@ module.exports = (req, res) => {
     }
   }
 
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  
-  res.json(filteredProducts);
+  res.status(200).json(filteredProducts);
 };

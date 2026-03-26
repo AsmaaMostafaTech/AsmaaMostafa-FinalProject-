@@ -1,7 +1,18 @@
 // Vercel Serverless Function for single product
 const products = require('./products-data');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   const { id } = req.query;
   const product = products.find(p => p.id === parseInt(id));
   
@@ -10,9 +21,5 @@ module.exports = (req, res) => {
     return;
   }
 
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  
-  res.json(product);
+  res.status(200).json(product);
 };
