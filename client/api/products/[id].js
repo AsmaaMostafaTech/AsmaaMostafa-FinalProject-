@@ -1,7 +1,7 @@
 // Vercel Serverless Function for single product
 const products = require('./products-data');
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -22,4 +22,4 @@ module.exports = async (req, res) => {
   }
 
   res.status(200).json(product);
-};
+}
