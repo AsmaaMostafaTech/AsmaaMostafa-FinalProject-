@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiShoppingCart, FiHeart, FiTag, FiClock, FiTrendingUp } from 'react-icons/fi';
-import { FiStar } from 'react-icons/fi';
+import { FiShoppingCart, FiHeart, FiFilter, FiX } from 'react-icons/fi';
+import { FiStar, FiChevronDown } from 'react-icons/fi';
 import { useCart } from '../contexts/CartContext';
 
 const Deals = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('hot');
-  const { addToCart, addToWishlist, isInCart, isInWishlist } = useCart();
+  const { addToCart, addToWishlist } = useCart();
 
   useEffect(() => {
     fetchDeals();

@@ -11,20 +11,20 @@ const ProductDetail = () => {
   const { addToCart, addToWishlist, isInCart, isInWishlist } = useCart();
 
   useEffect(() => {
-    fetchProduct();
+    const loadProduct = async () => {
+      try {
+        const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products/${id}`);
+        const data = await response.json();
+        setProduct(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+        setLoading(false);
+      }
+    };
+    
+    loadProduct();
   }, [id]);
-
-  const fetchProduct = async () => {
-    try {
-      const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching product:', error);
-      setLoading(false);
-    }
-  };
 
   const getCheapestStore = (stores) => {
     return stores.reduce((min, store) => store.price < min.price ? store : min);

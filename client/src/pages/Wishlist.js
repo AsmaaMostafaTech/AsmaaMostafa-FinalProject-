@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
-import { FiHeart, FiShoppingCart, FiTrash2, FiArrowLeft } from 'react-icons/fi';
+import { FiHeart, FiShoppingCart, FiTrash, FiArrowLeft } from 'react-icons/fi';
 import { FiStar } from 'react-icons/fi';
 
 const Wishlist = () => {

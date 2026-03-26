@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { FiShoppingCart, FiHeart, FiFilter, FiX } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiShoppingCart, FiHeart, FiFilter } from 'react-icons/fi';
 import { FiStar, FiChevronDown } from 'react-icons/fi';
 import { useCart } from '../contexts/CartContext';
 
@@ -9,7 +9,7 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const { addToCart, addToWishlist, isInCart, isInWishlist } = useCart();
+  const { addToCart, addToWishlist } = useCart();
   const [filters, setFilters] = useState({
     category: 'all',
     minPrice: '',
