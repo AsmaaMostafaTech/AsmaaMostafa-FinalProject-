@@ -16,7 +16,7 @@ const Deals = () => {
 
   const fetchDeals = async () => {
     try {
-      const response = await fetch('/api/products?sortBy=price-low');
+      const response = await fetch('https://asmaamostafa-final-project.vercel.app/api/products?sortBy=price-low');
       const data = await response.json();
       setProducts(data);
       setLoading(false);

@@ -41,7 +41,7 @@ const Products = () => {
         if (maxPrice) params.append('maxPrice', maxPrice);
         if (sortBy) params.append('sortBy', sortBy);
 
-        const response = await fetch(`/api/products?${params.toString()}`);
+        const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products?${params.toString()}`);
         const data = await response.json();
         setProducts(data);
       }

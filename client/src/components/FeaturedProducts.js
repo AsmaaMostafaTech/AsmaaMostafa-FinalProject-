@@ -14,7 +14,7 @@ const FeaturedProducts = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch('/api/products?sortBy=rating&limit=6');
+      const response = await fetch('https://asmaamostafa-final-project.vercel.app/api/products?sortBy=rating&limit=6');
       const data = await response.json();
       setProducts(data.slice(0, 6));
       setLoading(false);

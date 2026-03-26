@@ -16,7 +16,7 @@ const ProductDetail = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`/api/products/${id}`);
+      const response = await fetch(`https://asmaamostafa-final-project.vercel.app/api/products/${id}`);
       const data = await response.json();
       setProduct(data);
       setLoading(false);
