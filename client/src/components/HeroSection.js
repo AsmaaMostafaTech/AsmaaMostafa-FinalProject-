@@ -14,7 +14,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-baby-blue rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
@@ -24,10 +24,14 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-baby-blue to-silver bg-clip-text text-transparent animate-pulse-slow">
-          Find the Best Prices
+        <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <span className="bg-gradient-to-r from-baby-blue via-white to-silver bg-clip-text text-transparent animate-pulse-slow drop-shadow-glow hero-text-glow">
+            Find the Best Prices
+          </span>
           <br />
-          <span className="text-4xl md:text-6xl">Across the Web</span>
+          <span className="text-4xl md:text-6xl bg-gradient-to-r from-silver via-baby-blue to-white bg-clip-text text-transparent animate-pulse-slow drop-shadow-glow hero-text-glow">
+            Across the Web
+          </span>
         </h1>
         
         <p className="text-xl md:text-2xl text-text-secondary mb-12 max-w-2xl mx-auto">

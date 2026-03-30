@@ -14,9 +14,18 @@ const Products = () => {
     category: 'all',
     minPrice: '',
     maxPrice: '',
-    sortBy: 'price-low'
+    sortBy: 'price-low',
+    search: ''
   });
-  const { category, minPrice, maxPrice, sortBy } = filters;
+  const { category, minPrice, maxPrice, sortBy, search } = filters;
+
+  useEffect(() => {
+    // Initialize search from URL params
+    const searchParam = searchParams.get('search');
+    if (searchParam && searchParam !== filters.search) {
+      setFilters(prev => ({ ...prev, search: searchParam }));
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -29,6 +38,7 @@ const Products = () => {
         if (minPrice) queryParams.append('minPrice', minPrice);
         if (maxPrice) queryParams.append('maxPrice', maxPrice);
         if (sortBy) queryParams.append('sortBy', sortBy);
+        if (search) queryParams.append('search', search);
         
         const response = await fetch(`http://localhost:5000/api/products?${queryParams}`);
         if (!response.ok) {
@@ -44,7 +54,7 @@ const Products = () => {
     };
     
     loadProducts();
-  }, [category, minPrice, maxPrice, sortBy]);
+  }, [category, minPrice, maxPrice, sortBy, search]);
 
   const getCheapestPrice = (stores) => Math.min(...stores.map(s => s.price));
   const getCheapestStore = (stores) => stores.reduce((min, store) => store.price < min.price ? store : min);
@@ -67,7 +77,8 @@ const Products = () => {
       category: 'all',
       minPrice: '',
       maxPrice: '',
-      sortBy: 'price-low'
+      sortBy: 'price-low',
+      search: ''
     });
     setSearchParams({});
   };

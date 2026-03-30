@@ -272,8 +272,18 @@ const products = [
 
 // API Routes
 app.get('/api/products', (req, res) => {
-  const { category, minPrice, maxPrice, sortBy } = req.query;
+  const { category, minPrice, maxPrice, sortBy, search } = req.query;
   let filteredProducts = [...products];
+
+  // Filter by search
+  if (search) {
+    const searchQuery = search.toLowerCase();
+    filteredProducts = filteredProducts.filter(p => 
+      p.name.toLowerCase().includes(searchQuery) || 
+      p.description.toLowerCase().includes(searchQuery) ||
+      p.category.toLowerCase().includes(searchQuery)
+    );
+  }
 
   // Filter by category
   if (category && category !== 'all') {

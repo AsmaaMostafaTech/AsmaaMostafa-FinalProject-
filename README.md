@@ -13,6 +13,8 @@ Price Finder is a modern e-commerce platform that allows users to compare prices
 - **Wishlist**: Save favorite products for later purchase
 - **Responsive Design**: Beautiful glassmorphism UI that works on all devices
 - **Real-time Search**: Find products quickly and efficiently
+- **Hot Deals**: Special deals section with savings calculations
+- **Contact Form**: Functional contact form with backend integration
 
 ---
 
@@ -29,11 +31,12 @@ Price Finder is a modern e-commerce platform that allows users to compare prices
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web framework
 - **CORS** - Cross-origin resource sharing
+- **Nodemon** - Development server with auto-reload
 
 ### Development Tools
-- **Webpack** - Module bundler
-- **Babel** - JavaScript transpiler
-- **ESLint** - Code linting
+- **Concurrently** - Run multiple scripts simultaneously
+- **Webpack** - Module bundler (via React Scripts)
+- **Babel** - JavaScript transpiler (via React Scripts)
 
 ---
 
@@ -110,10 +113,11 @@ npm start
 
 **Option 2: Quick Start (Recommended)**
 ```bash
-# The project is configured to run both servers
-# Backend will start on port 5000
-# Frontend will start on port 3000
+npm run dev
 ```
+This will start both servers concurrently:
+- Backend will start on port 5000
+- Frontend will start on port 3000
 
 ### Step 3: Access the Application
 - **Frontend**: http://localhost:3000
@@ -193,17 +197,25 @@ app.post('/api/contact', (req, res) => {
 - **Wishlist**: Save products for later
 - **Price Comparison**: Multiple stores with different prices
 - **Product Ratings**: Star ratings with review counts
+- **Checkout Process**: Complete order flow with form validation
 
 ### 🖼️ **Image Gallery**
 - **Multiple Images**: Each product has 4 high-quality images
 - **Thumbnail Navigation**: Click thumbnails to switch main image
 - **Image Sources**: Professional images from Pinterest
+- **Zoom Effect**: Hover to zoom on product images
 
 ### 🔍 **Search & Filter**
 - **Category Filter**: Filter by product categories
 - **Price Range**: Set minimum and maximum price
 - **Sort Options**: Sort by price, rating, or name
 - **Real-time Updates**: Instant filtering without page reload
+
+### 📱 **User Experience**
+- **Toast Notifications**: Non-intrusive success/error messages
+- **Loading States**: Smooth loading animations
+- **Responsive Design**: Mobile-first approach
+- **Glassmorphism UI**: Modern frosted glass effects
 
 ---
 
@@ -256,195 +268,3 @@ For any questions or issues with the project, please refer to the contact form i
 ---
 
 **Happy Shopping! 🛍️✨**
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Search Functionality**: Smart search across product names and descriptions
-- **Deal Tracking**: Hot deals section with savings calculations
-- **Contact Form**: Functional contact form with backend integration
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **React 19** - Modern React with hooks
-- **Tailwind CSS** - Utility-first CSS framework
-- **React Router** - Client-side routing
-- **React Icons** - Icon library
-
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express** - Web framework
-- **CORS** - Cross-origin resource sharing
-
-### Design System
-- **Dark Navy** (#0A0F1C) - Main background
-- **Silver** (#C0C0C0) - UI elements
-- **Baby Blue** (#AED8F0) - Accent color
-- **Glassmorphism** - Blur and transparency effects
-- **Smooth Animations** - Hover effects and micro-interactions
-
-## 📁 Project Structure
-
-```
-price-finder/
-├── server.js              # Express server and API routes
-├── package.json           # Backend dependencies
-├── client/                # React frontend
-│   ├── src/
-│   │   ├── components/    # Reusable components
-│   │   │   ├── Navbar.js
-│   │   │   ├── Toast.js
-│   │   │   ├── HeroSection.js
-│   │   │   ├── FeaturedProducts.js
-│   │   │   └── HowItWorks.js
-│   │   ├── contexts/      # React contexts
-│   │   │   └── CartContext.js
-│   │   ├── pages/         # Page components
-│   │   │   ├── Home.js
-│   │   │   ├── Products.js
-│   │   │   ├── ProductDetail.js
-│   │   │   ├── Wishlist.js
-│   │   │   ├── Cart.js
-│   │   │   ├── Checkout.js
-│   │   │   ├── Contact.js
-│   │   │   ├── About.js
-│   │   │   └── Deals.js
-│   │   ├── App.js         # Main app component
-│   │   ├── index.css      # Global styles
-│   │   └── index.js       # App entry point
-│   ├── package.json       # Frontend dependencies
-│   └── tailwind.config.js # Tailwind configuration
-└── README.md
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd price-finder
-   ```
-
-2. **Install all dependencies**
-   ```bash
-   npm run install-all
-   ```
-   Or install separately:
-   ```bash
-   npm install
-   cd client
-   npm install
-   cd ..
-   ```
-
-3. **Start the development servers**
-   ```bash
-   npm run dev
-   ```
-   This will start both the backend server (port 5000) and frontend development server (port 3000) concurrently.
-
-### Manual Start
-
-If you prefer to start servers manually:
-
-1. **Start the backend server**
-   ```bash
-   npm start
-   ```
-   Backend will run on `http://localhost:5000`
-
-2. **Start the frontend server** (in a new terminal)
-   ```bash
-   cd client
-   npm start
-   ```
-   Frontend will run on `http://localhost:3000`
-
-## 📱 Available Pages
-
-- **Home** (`/`) - Hero section with search and featured products
-- **Products** (`/products`) - Product grid with filters and search
-- **Product Detail** (`/product/:id`) - Individual product with price comparison
-- **Wishlist** (`/wishlist`) - Saved products with localStorage
-- **Cart** (`/cart`) - Shopping cart with quantity management
-- **Checkout** (`/checkout`) - Order form and confirmation
-- **Deals** (`/deals`) - Hot deals and trending products
-- **About** (`/about`) - Company information and features
-- **Contact** (`/contact`) - Contact form with backend integration
-
-## 🔧 API Endpoints
-
-### Products
-- `GET /api/products` - Get all products with optional filtering
-- `GET /api/products/:id` - Get single product by ID
-- `GET /api/products/search/:query` - Search products
-
-### Contact
-- `POST /api/contact` - Submit contact form
-
-### Query Parameters
-- `category` - Filter by product category
-- `minPrice` - Minimum price filter
-- `maxPrice` - Maximum price filter
-- `sortBy` - Sort options (price-low, price-high, rating, name)
-
-## 🎨 Design Features
-
-- **Glassmorphism Effects**: Frosted glass appearance with backdrop blur
-- **Smooth Animations**: Hover effects, floating elements, and transitions
-- **Responsive Grid Layout**: Adapts to different screen sizes
-- **Premium Color Scheme**: Dark theme with baby blue accents
-- **Interactive Elements**: Buttons with glow effects and state changes
-- **Loading Skeletons**: Smooth loading states for better UX
-
-## 💾 Data Storage
-
-- **Cart & Wishlist**: Stored in browser localStorage
-- **Product Data**: Simulated backend data with realistic product information
-- **Form Submissions**: Console logged (can be extended to database)
-
-## 🔮 Future Enhancements
-
-- Real e-commerce API integration
-- User authentication and profiles
-- Price history tracking
-- Email notifications for price drops
-- Product recommendations
-- Review and rating system
-- Admin dashboard for product management
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Port conflicts**: Make sure ports 3000 and 5000 are available
-2. **CORS issues**: Backend includes CORS middleware
-3. **Tailwind not working**: Ensure `tailwind.config.js` is properly configured
-4. **Build errors**: Check that all dependencies are installed
-
-### Development Tips
-
-- Use browser dev tools to test responsive design
-- Check console for API responses
-- Test cart/wishlist functionality across browser sessions
-- Verify form submissions in backend console
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
----
-
-**Price Finder** - Making smart shopping easier, one comparison at a time! 🛍️✨

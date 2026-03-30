@@ -59,3 +59,89 @@ code {
 .glow-blue:hover {
   box-shadow: 0 0 30px rgba(174, 216, 240, 0.6);
 }
+
+/* Text glow effects */
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 20px rgba(174, 216, 240, 0.8)) 
+          drop-shadow(0 0 40px rgba(174, 216, 240, 0.4))
+          drop-shadow(0 0 60px rgba(255, 255, 255, 0.2));
+}
+
+/* Enhanced text glow for hero section */
+.hero-text-glow {
+  text-shadow: 
+    0 0 10px rgba(174, 216, 240, 0.8),
+    0 0 20px rgba(174, 216, 240, 0.6),
+    0 0 30px rgba(174, 216, 240, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Floating orbs animation */
+@keyframes orbFloat {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(
+      calc(-50% + (random() - 0.5) * 200vw),
+      calc(-50% + (random() - 0.5) * 200vh)
+    ) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Alternative orb animation paths */
+@keyframes orbFloat1 {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(150vw, -150vh) scale(0.2);
+    opacity: 0;
+  }
+}
+
+@keyframes orbFloat2 {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-150vw, 150vh) scale(0.2);
+    opacity: 0;
+  }
+}
+
+@keyframes orbFloat3 {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(150vw, 150vh) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* Dynamic orb animation using JavaScript */
+.animate-orb-float {
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
